@@ -1,0 +1,4 @@
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
+export PATH="$PATH:/usr/local/mysql/bin/"
