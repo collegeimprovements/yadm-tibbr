@@ -129,6 +129,10 @@ alias .en=". env.sh"
 alias wj="which jruby"
 alias rmd="rm -rf"
 alias mc="mycli -uroot"
+alias j-tibbr="ssh ashah_c@vmtbr1.tibbr.com" # USAID
+alias j-tibco="ssh ashah@vmtbr1.tibco.com" # scania, psg-test
+
+alias nah="git reset --hard;git clean -df;"
 
 
 if command -v brew >/dev/null 2>&1; then
