@@ -17,6 +17,9 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 export PATH="/usr/local/mysql/bin:$PATH"
+export JAVA_HOME=$(/usr/libexec/java_home)
+export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home:$PATH"
+
 #export PS1="\u@\h\w$ "
 
 print_pre_prompt ()
@@ -88,10 +91,10 @@ mcd () {
     cd $1
 }
 
-gs (){
-	cd scripts/
-	. env.sh
-}
+# gs (){
+# 	cd scripts/
+# 	. env.sh
+# }
 
 
 
@@ -103,36 +106,78 @@ kpn (){
 	fi
 }
 
+psa () {
+  ps aux | grep $1
+}
 
 
 
+
+
+alias sbp="source ~/.bash_profile"
+alias sublp="subl ~/.bash_profile"
+alias vbp="vim ~/.bash_profile"
 alias desk="cd ~/Desktop/"
 alias dlds="cd ~/Downloads/"
 alias docs="cd ~/Documents/"
+alias nuke='killall -9 '
+
 alias vim="mvim -v"
 alias v='f -e mvim -v'
+
 alias rf="rm -rf"
 alias mf="touch"
 alias md="mkdir"
 alias ld="ls -d */"
 alias lh="ls -d .*"
 alias ll="ls -l"
+
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+
 alias c="clear"
 alias w="which"
-alias gr='cd $(git rev-parse --show-cdup)' #git-root
-alias js="jruby -S script/server"
-alias jsp="jruby -S script/server -p 3000 -e production"
-alias .en=". env.sh"
+alias j="jruby -S"
+alias o="open ."
+
+# alias gr='cd $(git rev-parse --show-cdup --show-toplevel)' #git-root
+alias gr='cd $(git root)' # git config --global alias.root "rev-parse --show-toplevel" is ran already
+alias gt="gr && cd tibbr/"
+alias gs="gr && cd scripts/"
+alias gth="gr && cd tibbr-config/shared/tenants/themes/tibbr/themes"
+alias gtheme="gr && cd tibbr-config/shared/tenants/themes/tibbr/themes"
+alias gc="gr && cd tibbr-config/"
+
+
+alias e="gs && . env.sh"
+alias status="gs && ./status.sh"
+alias ss="gs && ./0_memcached.sh && ./2_cassandra.sh && ./2_zookeeper.sh start && ./2_search.sh && ./1_main_job_runner.sh"
+
+
+alias vac="gr && vim tibbr-config/app_config.yml"
+alias status="gs && ./status.sh"
+
+alias .e=". env.sh"
 alias wj="which jruby"
 alias rmd="rm -rf"
 alias mc="mycli -uroot"
+
 alias j-tibbr="ssh ashah_c@vmtbr1.tibbr.com" # USAID
-alias j-tibco="ssh ashah@vmtbr1.tibco.com" # scania, psg-test
+alias j-tibco="ssh ashah@vmtbr1.tibco.com"   # scania, psg-test
 
 alias nah="git reset --hard;git clean -df;"
+
+alias twba="jruby -S rake tibbr:web:build_all"
+alias twbc="jruby -S rake tibbr:web:build_css"
+
+alias rc="jruby -S script/console"
+alias js="gt && jruby -S script/server"
+alias jsp="jruby -S script/server -p 3000 -e production"
+alias kall='killall "java" && killall "memcached"'
+
+
+
 
 
 if command -v brew >/dev/null 2>&1; then
@@ -155,3 +200,21 @@ unset fasd_cache
 
 # test -e ${HOME}/.iterm2_shell_integration.
 # bash && source ${HOME}/.iterm2_shell_integration.bash
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+
+
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+  fi
+
+
+
+source ~/git-completion.bash
+
+
+# Tips and tricks
+# 1. apachectl stop :: to stop apache
+
+
